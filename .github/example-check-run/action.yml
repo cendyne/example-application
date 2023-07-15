@@ -1,0 +1,15 @@
+name: 'Example Check Run'
+description: 'Checks to see if a badfile exists'
+
+runs:
+  using: "composite"
+  steps:
+    - uses: denoland/setup-deno@v1.1.1
+      with:
+        deno-version: v1.x # Run with latest stable Deno.
+    - run: deno run --allow-net --allow-read --allow-env .github/example-check-run/run.ts
+
+
+branding:
+  icon: "box"
+  color: "green"

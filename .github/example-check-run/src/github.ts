@@ -78,9 +78,10 @@ export class GitHubClient {
     };
     // Compose both into an unsigned JWT
     const encoder = new TextEncoder();
-    const unsignedJWT = encodeBase64Url(encoder.encode(JSON.stringify(header)))
-      + "."
-      + encodeBase64Url(encoder.encode(JSON.stringify(claims)));
+    const unsignedJWT =
+      encodeBase64Url(encoder.encode(JSON.stringify(header))) +
+      "." +
+      encodeBase64Url(encoder.encode(JSON.stringify(claims)));
     // Construct a signature with our key
     const signature = await crypto.subtle.sign(
       algorithm,
@@ -115,7 +116,7 @@ export class GitHubClient {
     try {
       installationJson = JSON.parse(installationJsonText);
       if (!installationJson.access_tokens_url) {
-        throw new Error("Could not find access_tokens_url")
+        throw new Error("Could not find access_tokens_url");
       }
     } catch (e) {
       console.error(e);

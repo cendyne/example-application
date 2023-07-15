@@ -77,12 +77,15 @@ export class GitHubClient {
       exp: now + 60,
     };
     // Compose both into an unsigned JWT
-    const unsignedJWT = JSON.stringify(header) + "." + JSON.stringify(claims);
+    const encoder = new TextEncoder();
+    const unsignedJWT = encodeBase64Url(encoder.encode(JSON.stringify(header)))
+      + "."
+      + encodeBase64Url(encoder.encode(JSON.stringify(claims)));
     // Construct a signature with our key
     const signature = await crypto.subtle.sign(
       algorithm,
       key,
-      new TextEncoder().encode(unsignedJWT),
+      encoder.encode(unsignedJWT),
     );
     // Encode the signature for a JWT
     const b64Signature = encodeBase64Url(signature);

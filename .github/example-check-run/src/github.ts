@@ -40,7 +40,7 @@ export class GitHubClient {
     let APP_PRIVATE_KEY_TMP: JsonWebKey;
     try {
       APP_PRIVATE_KEY_TMP = JSON.parse(APP_PRIVATE_KEY) as JsonWebKey;
-      if (APP_PRIVATE_KEY_TMP.kty != "RS256") {
+      if (APP_PRIVATE_KEY_TMP.kty != "RSA") {
         throw new Error(
           "APP_PRIVATE_KEY JWK is unsupported, RS256 only.",
         );

@@ -111,6 +111,9 @@ export class GitHubClient {
     };
     try {
       installationJson = JSON.parse(installationJsonText);
+      if (!installationJson.access_tokens_url) {
+        throw new Error("Could not find access_tokens_url")
+      }
     } catch (e) {
       console.error(e);
       console.warn(installationJsonText);

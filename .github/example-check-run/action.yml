@@ -1,6 +1,15 @@
 name: 'Example Check Run'
 description: 'Checks to see if a badfile exists'
 
+
+inputs:
+  appId:
+    description: "GitHub Application ID"
+    required: true
+  appPrivateKey:
+    description: "GitHub Application Private Key as JWK"
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -10,7 +19,6 @@ runs:
     - name: Run check run
       shell: bash
       run: deno run --allow-net --allow-read --allow-env .github/example-check-run/src/run.ts
-
 
 branding:
   icon: "box"

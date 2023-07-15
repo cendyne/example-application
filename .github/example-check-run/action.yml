@@ -22,7 +22,7 @@ runs:
       env:
         # Composite actions do not automatically propagate inputs to steps
         APP_ID: ${{ inputs.appId }}
-        APP_PRIVATE_KEY: ${{ inputs.appPrivateKEy }}
+        APP_PRIVATE_KEY: ${{ inputs.appPrivateKey }}
 
 branding:
   icon: "box"

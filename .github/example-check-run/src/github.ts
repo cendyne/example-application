@@ -31,24 +31,25 @@ export class GitHubClient {
   private privateKey: JsonWebKey;
 
   constructor(APP_ID: string, APP_PRIVATE_KEY: string) {
-    // Get APP_PRIVATE_KEY and APP_ID from the environment.
+    // APP_ID and APP_PRIVATE_KEY come from the environment
+    if (!APP_ID || APP_ID == "") {
+      throw new Error("APP_ID is not set");
+    }
+    this.appId = APP_ID;
+
     let APP_PRIVATE_KEY_TMP: JsonWebKey;
     try {
       APP_PRIVATE_KEY_TMP = JSON.parse(APP_PRIVATE_KEY) as JsonWebKey;
       if (APP_PRIVATE_KEY_TMP.kty != "RS256") {
         throw new Error(
-          "INPUT_APP_PRIVATE_KEY JWK is unsupported, RS256 only.",
+          "APP_PRIVATE_KEY JWK is unsupported, RS256 only.",
         );
       }
     } catch (_e) {
       // Could not parse as JSON
-      throw new Error("Could not parse INPUT_APP_PRIVATE_KEY as JSON");
+      throw new Error("Could not parse APP_PRIVATE_KEY as JSON");
     }
     this.privateKey = APP_PRIVATE_KEY_TMP;
-    if (!APP_ID || APP_ID == "") {
-      throw new Error("INPUT_APP_ID is not set");
-    }
-    this.appId = APP_ID;
     this.token = null;
   }
   async loadToken(): Promise<void> {

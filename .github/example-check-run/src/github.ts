@@ -45,8 +45,9 @@ export class GitHubClient {
           "APP_PRIVATE_KEY JWK is unsupported, RS256 only.",
         );
       }
-    } catch (_e) {
+    } catch (e) {
       // Could not parse as JSON
+      console.error(e);
       throw new Error("Could not parse APP_PRIVATE_KEY as JSON");
     }
     this.privateKey = APP_PRIVATE_KEY_TMP;

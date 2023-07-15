@@ -7,7 +7,9 @@ runs:
     - uses: denoland/setup-deno@v1.1.1
       with:
         deno-version: v1.x # Run with latest stable Deno.
-    - run: deno run --allow-net --allow-read --allow-env .github/example-check-run/run.ts
+    - name: Run check run
+      shell: bash
+      run: deno run --allow-net --allow-read --allow-env .github/example-check-run/run.ts
 
 
 branding:

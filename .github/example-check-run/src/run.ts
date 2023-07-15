@@ -1,9 +1,5 @@
 import { GitHubClient } from "./github.ts";
 
-for (const [key,value] of Object.entries(Deno.env.toObject())) {
-  console.log(`Environment ${key} set with length: ${value.length} and begins with '${value.slice(0, 5)}'`)
-}
-
 const client = new GitHubClient(
   Deno.env.get("APP_ID") || "",
   Deno.env.get("APP_PRIVATE_KEY") || "",

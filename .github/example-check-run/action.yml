@@ -19,6 +19,10 @@ runs:
     - name: Run check run
       shell: bash
       run: deno run --allow-net --allow-read --allow-env .github/example-check-run/src/run.ts
+      env:
+        # Composite actions do not automatically propagate inputs to steps
+        APP_ID: ${{ inputs.appId }}
+        APP_PRIVATE_KEY: ${{ inputs.appPrivateKEy }}
 
 branding:
   icon: "box"

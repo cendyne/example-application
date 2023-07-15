@@ -1,8 +1,8 @@
 import { GitHubClient } from "./github.ts";
 
 const client = new GitHubClient(
-  Deno.env.get("INPUT_APP_ID") || "",
-  Deno.env.get("INPUT_APP_PRIVATE_KEY") || "",
+  Deno.env.get("APP_ID") || "",
+  Deno.env.get("APP_PRIVATE_KEY") || "",
 );
 
 await client.loadToken();

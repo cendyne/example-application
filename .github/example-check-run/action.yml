@@ -3,10 +3,10 @@ description: 'Checks to see if a badfile exists'
 
 
 inputs:
-  appId:
+  app-id:
     description: "GitHub Application ID"
     required: true
-  appPrivateKey:
+  app-private-key:
     description: "GitHub Application Private Key as JWK"
     required: true
 
@@ -21,9 +21,9 @@ runs:
       run: deno run --allow-net --allow-read --allow-env .github/example-check-run/src/run.ts
       env:
         # Composite actions do not automatically propagate inputs to steps
-        APP_ID: ${{ inputs.appId }}
-        APP_PRIVATE_KEY: ${{ inputs.appPrivateKey }}
+        APP_ID: ${{ inputs.app-id }}
+        APP_PRIVATE_KEY: ${{ inputs.app-private-key }}
 
 branding:
-  icon: "box"
+  icon: "star"
   color: "green"

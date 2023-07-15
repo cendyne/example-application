@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/example-check-run
         with:
-          appId: ${{ env.APP_ID }}
-          appPrivateKey: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          app-private-key: ${{ secrets.APP_PRIVATE_KEY }}
 

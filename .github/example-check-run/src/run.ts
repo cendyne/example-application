@@ -21,9 +21,9 @@ try {
 }
 
 try {
-  const commentFile = await Deno.stat("./comment.md");
+  const _commentFile = await Deno.stat("./comment.md");
   // When commentFile exists, which is asserted true at this point
-  const comment = await Deno.readTextFile('./comment.md');
+  const comment = await Deno.readTextFile("./comment.md");
   // Only comment if on an open pull request.
   const pullRequestId = await client.findOpenPullRequest();
   if (pullRequestId) {

@@ -9,3 +9,8 @@ possible from within a GitHub Action.
 
 See the `.github` folder for the internal details. The Pull Request Tab will
 contain an example pull request which fails the check run.
+
+----
+
+This example has badfile.txt which should cause a Check Run result to report on
+it!

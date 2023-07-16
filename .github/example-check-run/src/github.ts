@@ -240,7 +240,7 @@ export class GitHubClient {
     console.log(`Completed check-run ${id}`);
   }
 
-  async findOpenPullRequest() : Promise<number | null> {
+  async findOpenPullRequest(): Promise<number | null> {
     // Search for a pull request by branch name
     const pullsResponse = await fetch(
       `https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_REF_NAME}/pulls`,
@@ -254,7 +254,7 @@ export class GitHubClient {
     );
     if (pullsResponse.status != 200) {
       console.error("Pulls could not run: ", await pullsResponse.text());
-      throw new Error('Could not find Pull request');
+      throw new Error("Could not find Pull request");
     }
     const pullsJson = await pullsResponse.json() as {
       // This structure is incomplete, as this is only an illustrative example

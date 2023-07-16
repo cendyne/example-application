@@ -239,4 +239,60 @@ export class GitHubClient {
     }
     console.log(`Completed check-run ${id}`);
   }
+
+  async findOpenPullRequest() : Promise<number | null> {
+    // Search for a pull request by branch name
+    const pullsResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_REF_NAME}/pulls`,
+      {
+        headers: new Headers([
+          ["Accept", "application/vnd.github+json"],
+          ["Authorization", `Bearer ${this.token}`],
+          ["X-GitHub-Api-Version", "2022-11-28"],
+        ]),
+      },
+    );
+    if (pullsResponse.status != 200) {
+      console.error("Pulls could not run: ", await pullsResponse.text());
+      throw new Error('Could not find Pull request');
+    }
+    const pullsJson = await pullsResponse.json() as {
+      // This structure is incomplete, as this is only an illustrative example
+      number: number;
+      state: string;
+    }[];
+
+    if (pullsJson.length > 0) {
+      if (pullsJson[0].state == "open") {
+        return pullsJson[0].number;
+      }
+    }
+
+    return null;
+  }
+
+  async postComment(
+    issueNumber: number,
+    body: string,
+  ): Promise<void> {
+    const postCommentResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${issueNumber}/comments`,
+      {
+        headers: new Headers([
+          ["Accept", "application/vnd.github+json"],
+          ["Authorization", `Bearer ${this.token}`],
+          ["X-GitHub-Api-Version", "2022-11-28"],
+          ["Content-Type", "application/json"],
+        ]),
+        body: JSON.stringify({
+          body,
+        }),
+        method: "POST",
+      },
+    );
+    if (postCommentResponse.status != 201) {
+      console.error("Post comment failed: ", await postCommentResponse.text());
+      throw new Error("Could not post comment.");
+    }
+  }
 }
